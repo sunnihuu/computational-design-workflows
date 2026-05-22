@@ -14,14 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Firebase configuration object - connects your app to your Firebase project
   // Get these values from your Firebase Console (https://console.firebase.google.com)
   
-const firebaseConfig = {
-  apiKey: "AIzaSyCoUPaghdzQmUb0udEERl5LxUe17WyJmxE",
-  authDomain: "aiaaa-dc6dc.firebaseapp.com",
-  projectId: "aiaaa-dc6dc",
-  storageBucket: "aiaaa-dc6dc.firebasestorage.app",
-  messagingSenderId: "345899321879",
-  appId: "1:345899321879:web:4950f1fe6aae719f4daa52",
-  measurementId: "G-2XCHMH6HEE"
+// Allow overriding via window.APP_CONFIG.FIREBASE_CONFIG (see config.example.js)
+const firebaseConfig = (window.APP_CONFIG && window.APP_CONFIG.FIREBASE_CONFIG) || {
+  apiKey: "your-firebase-apiKey",
+  authDomain: "your-firebase-authDomain",
+  projectId: "your-firebase-projectId",
+  storageBucket: "your-firebase-storageBucket",
+  messagingSenderId: "your-firebase-messagingSenderId",
+  appId: "your-firebase-appId",
+  measurementId: "your-firebase-measurementId"
 };
 
   // Initialize Firebase - connects your app to Firebase services
@@ -36,8 +37,9 @@ const firebaseConfig = {
   // ChatGPT API configuration - get an API key from OpenAI
   // Visit: https://platform.openai.com/api-keys to create your API key
   
-  const OPENAI_API_KEY = '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';
-  const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+  // Use config or fallback placeholder. For production, call OpenAI from a server.
+  const OPENAI_API_KEY = (window.APP_CONFIG && window.APP_CONFIG.OPENAI_API_KEY) || 'your-openai-api-key-here';
+  const OPENAI_API_URL = (window.APP_CONFIG && window.APP_CONFIG.OPENAI_API_URL) || 'https://api.openai.com/v1/chat/completions';
   
   // Rate limiting configuration
   let lastApiCall = 0;

@@ -1,0 +1,2 @@
+# If you add Python dependencies for data processing, list them here.
+# Current scripts use only Python standard library (csv, json).

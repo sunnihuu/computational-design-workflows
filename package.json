@@ -1,0 +1,11 @@
+{
+  "name": "computational-design-workflows",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --ext .js --rule 'no-console:0' || true"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}

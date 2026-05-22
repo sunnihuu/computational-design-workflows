@@ -923,7 +923,8 @@ class SinglePageController {
         }
         
         // You'll need to add your Mapbox access token here
-        mapboxgl.accessToken = 'pk.eyJ1IjoieW91ci11c2VybmFtZSIsImEiOiJjbGV4YW1wbGUifQ.example'; // Replace with your token
+            // Use configured Mapbox token if provided (see config.example.js)
+            mapboxgl.accessToken = (window.APP_CONFIG && window.APP_CONFIG.MAPBOX_TOKEN) || 'your-mapbox-token-here';
         
         try {
             const map = new mapboxgl.Map({

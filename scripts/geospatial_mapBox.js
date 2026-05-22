@@ -1,5 +1,5 @@
-
-mapboxgl.accessToken = 'pk.eyJ1Ijoic3VubmlodSIsImEiOiJjbWQ2bDBwNzcwMThwMm9weTVjc2JuNG90In0.sVXA1xGrFWnG-1ZV_EyO1w';
+// Use a configurable token provided by `config.js` (copy from config.example.js)
+mapboxgl.accessToken = (window.APP_CONFIG && window.APP_CONFIG.MAPBOX_TOKEN) || 'your-mapbox-token-here';
 
 const map = new mapboxgl.Map({
   container: 'mapbox-container-3',
