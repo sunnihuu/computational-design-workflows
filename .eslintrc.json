@@ -38,4 +38,12 @@
     "no-inner-declarations": "off",
     "no-unused-vars": ["warn", { "vars": "local", "args": "none", "ignoreRestSiblings": true }]
   }
+
+  ,"overrides": [
+    {
+      "files": ["server/**"],
+      "env": { "node": true },
+      "globals": { "process": "readonly", "require": "readonly", "module": "readonly" }
+    }
+  ]
 }

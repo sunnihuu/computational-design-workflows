@@ -1,26 +1,6 @@
 // 2D Spatial Canvases page logic
 
-// Load Roboto font
-const loadRobotoFont = async () => {
-  try {
-    // Wait for the font to be available
-    await document.fonts.ready;
-    
-    // Check if Roboto is already loaded
-    if (document.fonts.check('bold 32px Roboto')) {
-      console.log('Roboto font is ready');
-      return;
-    }
-    
-    // Load the font if not already available
-    const font = new FontFace('Roboto', 'url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2)');
-    await font.load();
-    document.fonts.add(font);
-    console.log('Roboto font loaded successfully');
-  } catch (error) {
-    console.log('Roboto font loaded from fallback');
-  }
-};
+// Font loading is handled by `CommonUtils.loadRobotoFont()` in `scripts/common.js`.
 
 // MediaPipe Hands setup and finger landmark drawing
 document.addEventListener('DOMContentLoaded', function() {
