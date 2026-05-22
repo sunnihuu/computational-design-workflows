@@ -1,79 +1,93 @@
 # Computational Design Workflows
 
-简介
-	本仓库包含一组前端可视化页面（D3、Three.js、Mapbox、Firebase 示例）和用于处理纽约农贸市场数据的 Python 脚本。
+Overview
 
-快速开始
-1. 克隆或下载仓库到本地。
-2. 在本地启动静态服务器（推荐）：
+This repository contains front-end visualization examples (D3, Three.js, Mapbox, Firebase) and a small Python script to process New York City farmers market data.
+
+Quick start
+
+1. Clone the repository and change into the project folder:
 
 ```bash
-cd path/to/computational-design-workflows
-# 使用 Python3 内置的简单服务器
-python3 -m http.server 8000
-# 然后在浏览器打开 http://localhost:8000/pages/index.html
+git clone <repo-url>
+cd computational-design-workflows
 ```
 
-配置（API key）
-- 请复制 `config.example.js` 为 `config.js` 并填入你的密钥和 Firebase 配置：
+2. Run a simple static server to preview the pages:
 
-- `MAPBOX_TOKEN`：Mapbox 公钥
-- `OPENAI_API_KEY`：OpenAI（ChatGPT）API Key（仅用于测试，生产请走服务端代理）
-- `FIREBASE_CONFIG`：Firebase 项目配置对象
+```bash
+python3 -m http.server 8000
+# Open http://localhost:8000/pages/index.html in your browser
+```
 
-依赖
-- 前端依赖主要通过 CDN 引入（Mapbox, D3, Three.js, Firebase 等），详见 `frontend-dependencies.md`。
-- Python 脚本只使用标准库（`csv`, `json`），若需更多处理请在 `requirements.txt` 中添加对应包。
+Configuration (API keys)
 
+- Copy `config.example.js` to `config.js` and fill in your keys. `config.js` is ignored by `.gitignore` to avoid committing secrets.
+- `MAPBOX_TOKEN`: Mapbox public token
+- `OPENAI_API_KEY`: OpenAI API key (use server-side proxy for production)
+- `FIREBASE_CONFIG`: Firebase project configuration object
 
-**图片资源（整理）**
-所有图片资源请统一放到 `assets/images/`。
-建议使用 `assets/images/icons/`、`assets/images/logos/`、`assets/images/photos/` 等子目录进行分类。
-仓库内已包含 `assets/images/.gitkeep` 作为占位文件和 `assets/images/README.md` 说明命名与管理规则。
+Dependencies
 
-组织和资源
-- 图片资源目录：`assets/images/`（请将项目图片放到此目录）。仓库内提供 `.gitkeep` 占位。
-- 数据目录：`data/`（包含 CSV 和 geojson 文件）。
+- Front-end libraries are loaded via CDN. See `frontend-dependencies.md` for exact versions and CDN links.
+- Python: the data-processing script uses Python standard library (`csv`, `json`). Add third-party packages to `requirements.txt` if needed and install inside a virtual environment.
 
-运行数据处理脚本
-- 将原始 CSV 放在 `data/NYC_Farmers_Markets_20250719.csv`（仓库已包含示例）。
-- 运行：
+Assets and data
+
+- Put image assets in `assets/images/`. Use subfolders like `icons/`, `logos/`, `photos/` for organization. See `assets/images/README.md` for guidance.
+- Data files live in `data/` (CSV and GeoJSON). The script `data/process_farmers_markets.py` converts the provided CSV into a GeoJSON file.
+
+Run the data script
 
 ```bash
 python3 data/process_farmers_markets.py
 ```
 
-这会在仓库根目录生成 `manhattan_farmers_markets.geojson`（可手动移动到 `data/`）。
+This writes `manhattan_farmers_markets.geojson` to the repository root.
 
-安全性与注意事项
-- 仓库中不应包含私密密钥。请使用 `config.js` 或服务端代理来注入密钥。已将硬编码密钥替换为可配置方式（详见 `config.example.js`）。
+Security notes
 
-故障排查
-- 若 Mapbox 显示为空白，确认 `config.js` 中的 `MAPBOX_TOKEN` 正确并且域名没有被限制。
-- 若 ChatGPT 请求失败，请检查 `OPENAI_API_KEY` 是否正确以及浏览器是否允许跨域请求（推荐通过服务端代理调用 OpenAI）。
+- Never commit API secrets. Use `config.js` (ignored by git) or a server-side proxy to keep keys secret.
+- The front-end code was updated to read tokens from `window.APP_CONFIG`. An optional local proxy server is provided to proxy OpenAI requests server-side.
 
-如需我继续：我可以运行本地检查（readme + 创建 config.js 模板、移除或替换更多硬编码密钥、运行脚本并修复明显错误）。
+Optional: local OpenAI proxy (recommended for security)
 
-本地代理（可选）
-1. 进入 `server` 目录并安装依赖：
+1. Install server dependencies and run the proxy:
 
 ```bash
 cd server
 npm install
-```
-
-2. 创建 `.env` 或在 Shell 中设置环境变量：
-
-```bash
 export OPENAI_API_KEY="sk-..."
-# 可选覆盖： export OPENAI_API_URL="https://api.openai.com/v1/chat/completions"
+npm start
 ```
 
-3. 启动代理：
+2. Point the front-end to the proxy by setting `OPENAI_API_URL` to `/api/openai` in `config.js` (or enable `USE_PROXY: true` in the example).
+
+Development and checks
+
+- Start a static server to preview pages:
 
 ```bash
-npm start
-# 代理默认监听 http://localhost:3000
+python3 -m http.server 8000
 ```
 
-4. 在 `config.js` 中将 `OPENAI_API_URL` 设置为 `/api/openai`（或启用 `USE_PROXY:true`），前端将自动使用代理而不在客户端暴露密钥。
+- Run ESLint (project root):
+
+```bash
+npm install
+npm run lint
+```
+
+Files of interest
+
+- `pages/` — HTML pages
+- `scripts/` — front-end JavaScript
+- `styles/` — CSS
+- `data/` — CSV and GeoJSON + processing script
+- `server/` — optional Node proxy for OpenAI
+
+If you'd like, I can:
+
+- Fill `config.js` locally with keys you provide (I will not commit secrets).
+- Start the local proxy and run an integration test (you must set `OPENAI_API_KEY` in your environment).
+- Remove remaining ESLint warnings or further tidy up code.
