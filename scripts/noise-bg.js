@@ -1,4 +1,5 @@
 // Animated Perlin noise dot grid background for index.html (refined)
+/* exported setup draw windowResized */
 // Uses p5.js
 let xScale = 0.012;
 let yScale = 0.014;

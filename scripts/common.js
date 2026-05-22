@@ -253,5 +253,8 @@ class CanvasUtils {
     }
 }
 
+// Expose to global scope so other scripts can use it without redefining
+if (typeof window !== 'undefined') window.CanvasUtils = CanvasUtils;
+
 // Initialize common functionality
 new CommonUtils(); 

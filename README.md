@@ -1,7 +1,7 @@
 # Computational Design Workflows
 
 简介
--	本仓库包含一组前端可视化页面（D3、Three.js、Mapbox、Firebase 示例）和用于处理纽约农贸市场数据的 Python 脚本。
+	本仓库包含一组前端可视化页面（D3、Three.js、Mapbox、Firebase 示例）和用于处理纽约农贸市场数据的 Python 脚本。
 
 快速开始
 1. 克隆或下载仓库到本地。
@@ -24,6 +24,12 @@ python3 -m http.server 8000
 依赖
 - 前端依赖主要通过 CDN 引入（Mapbox, D3, Three.js, Firebase 等），详见 `frontend-dependencies.md`。
 - Python 脚本只使用标准库（`csv`, `json`），若需更多处理请在 `requirements.txt` 中添加对应包。
+
+
+**图片资源（整理）**
+所有图片资源请统一放到 `assets/images/`。
+建议使用 `assets/images/icons/`、`assets/images/logos/`、`assets/images/photos/` 等子目录进行分类。
+仓库内已包含 `assets/images/.gitkeep` 作为占位文件和 `assets/images/README.md` 说明命名与管理规则。
 
 组织和资源
 - 图片资源目录：`assets/images/`（请将项目图片放到此目录）。仓库内提供 `.gitkeep` 占位。

@@ -951,9 +951,11 @@ class SinglePageController {
             });
             
             // Set up search functionality
-            const searchInput = document.getElementById('searchFeature');
             const resetBtn = document.getElementById('resetFilters');
             const fitBtn = document.getElementById('fitToData');
+            
+            // `searchFeature` input may not exist in all pages; only query when needed
+            // const searchInput = document.getElementById('searchFeature');
             
             if (resetBtn) {
                 resetBtn.addEventListener('click', () => {

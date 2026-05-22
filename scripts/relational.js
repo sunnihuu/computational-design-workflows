@@ -344,7 +344,7 @@ function initializeRelationalVisualization() {
             .attr('d', d => diagonal(d, d.parent));
         
         // Remove any exiting links
-        const linkExit = link.exit().transition()
+        link.exit().transition()
             .duration(duration)
             .attr('d', d => {
                 const o = { x: source.x, y: source.y };
