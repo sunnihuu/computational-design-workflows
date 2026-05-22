@@ -252,11 +252,19 @@ const firebaseConfig = (window.APP_CONFIG && window.APP_CONFIG.FIREBASE_CONFIG) 
       
       console.log('Request headers:', headers);
       
-      const response = await fetch(OPENAI_API_URL, {
+      // If OPENAI_API_URL is same-origin (proxy), do not attach Authorization header from client.
+      const useProxy = OPENAI_API_URL && OPENAI_API_URL.startsWith('/');
+      const fetchOptions = {
         method: 'POST',
-        headers: headers,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
-      });
+      };
+
+      if (!useProxy) {
+        fetchOptions.headers['Authorization'] = `Bearer ${OPENAI_API_KEY}`;
+      }
+
+      const response = await fetch(OPENAI_API_URL, fetchOptions);
 
       console.log('=== CHATGPT API RESPONSE DEBUG ===');
       console.log('Response status:', response.status);

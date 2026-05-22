@@ -5,8 +5,10 @@
 
 window.APP_CONFIG = {
   MAPBOX_TOKEN: 'your-mapbox-token-here',
+  // If you run the optional local proxy, set OPENAI_API_URL to '/api/openai' and do NOT set OPENAI_API_KEY here.
   OPENAI_API_KEY: 'your-openai-api-key-here',
-  OPENAI_API_URL: 'https://api.openai.com/v1/chat/completions',
+  OPENAI_API_URL: '/api/openai',
+  USE_PROXY: true,
   FIREBASE_CONFIG: {
     apiKey: 'your-firebase-apiKey',
     authDomain: 'your-firebase-authDomain',

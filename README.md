@@ -47,3 +47,27 @@ python3 data/process_farmers_markets.py
 - 若 ChatGPT 请求失败，请检查 `OPENAI_API_KEY` 是否正确以及浏览器是否允许跨域请求（推荐通过服务端代理调用 OpenAI）。
 
 如需我继续：我可以运行本地检查（readme + 创建 config.js 模板、移除或替换更多硬编码密钥、运行脚本并修复明显错误）。
+
+本地代理（可选）
+1. 进入 `server` 目录并安装依赖：
+
+```bash
+cd server
+npm install
+```
+
+2. 创建 `.env` 或在 Shell 中设置环境变量：
+
+```bash
+export OPENAI_API_KEY="sk-..."
+# 可选覆盖： export OPENAI_API_URL="https://api.openai.com/v1/chat/completions"
+```
+
+3. 启动代理：
+
+```bash
+npm start
+# 代理默认监听 http://localhost:3000
+```
+
+4. 在 `config.js` 中将 `OPENAI_API_URL` 设置为 `/api/openai`（或启用 `USE_PROXY:true`），前端将自动使用代理而不在客户端暴露密钥。
